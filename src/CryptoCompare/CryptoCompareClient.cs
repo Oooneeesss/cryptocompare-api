@@ -67,6 +67,12 @@ namespace CryptoCompare
         public ICoinsClient Coins => new CoinsClient(this._httpClient);
 
         /// <summary>
+        /// Gets the client for retrieving market pairs for a coin.
+        /// </summary>
+        /// <seealso cref="P:CryptoCompare.ICryptoCompareClient.Coins"/>
+        public IMappingFromSymbolClient Pairs => new MappingFromSymbolClient(this._httpClient);
+
+        /// <summary>
         /// Gets the client for exchanges related api endpoints.
         /// </summary>
         /// <seealso cref="P:CryptoCompare.ICryptoCompareClient.Exchanges"/>

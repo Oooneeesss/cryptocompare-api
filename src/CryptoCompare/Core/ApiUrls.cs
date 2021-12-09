@@ -14,6 +14,10 @@ namespace CryptoCompare
             "https://min-api.cryptocompare.com/data/",
             UriKind.Absolute);
 
+        public static readonly Uri MinApiEndpointV2 = new Uri(
+            "https://min-api.cryptocompare.com/data/v2/",
+            UriKind.Absolute);
+
         public static readonly Uri SiteApiEndpoint = new Uri(
             "https://www.cryptocompare.com/api/data/",
             UriKind.Absolute);
@@ -21,6 +25,18 @@ namespace CryptoCompare
         public static Uri AllCoins() => new Uri(MinApiEndpoint, "all/coinlist");
 
         public static Uri AllExchanges() => new Uri(MinApiEndpoint, "all/exchanges");
+
+        public static Uri CoinPairs([NotNull] string fsym)
+        {
+            Check.NotNull(fsym, nameof(fsym));
+            var uri = new Uri(MinApiEndpointV2, "pair/mapping/fsym").ApplyParameters(
+                new Dictionary<string, string>
+                {
+                    { nameof(fsym), fsym }
+                });
+
+            return uri;
+        }
 
         public static Uri CoinSnapshot([NotNull] string fsym, [NotNull] string tsym)
         {
